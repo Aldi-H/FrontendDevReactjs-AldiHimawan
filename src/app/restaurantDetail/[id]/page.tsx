@@ -12,24 +12,10 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import { FaStar, FaLocationDot } from "react-icons/fa6";
-import { IoMdRestaurant } from "react-icons/io";
-import Link from "next/link";
+import { FaStar, FaLocationDot, FaCity } from "react-icons/fa6";
 import DetailPage from "@/app/restaurantDetail/review";
 
 const RestaurantDetail = ({ params }: { params: { id: string } }) => {
-  const [activeNav, setActiveNav] = useState(1);
-
-  const NavList = [
-    {
-      id: 1,
-      name: "Detail",
-    },
-    {
-      id: 2,
-      name: "Ulasan",
-    },
-  ];
   return (
     <Container maxW="5xl" mt={8}>
       <Box display="flex" gap={12}>
@@ -62,7 +48,21 @@ const RestaurantDetail = ({ params }: { params: { id: string } }) => {
                   letterSpacing="wide"
                   fontSize="sm"
                 >
-                  Address/City
+                  Address
+                </Box>
+              </Box>
+
+              <Box alignContent="center" display="flex" gap={2}>
+                <Box>
+                  <Icon as={FaCity} color="blue.800" w={5} h={5} />
+                </Box>
+                <Box
+                  color="gray.500"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                >
+                  City
                 </Box>
               </Box>
 
