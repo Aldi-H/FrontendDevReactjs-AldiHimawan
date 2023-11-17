@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Badge,
   Box,
@@ -13,14 +13,25 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaStar, FaLocationDot, FaCity } from "react-icons/fa6";
-import DetailPage from "@/app/restaurantDetail/review";
+import useRestaurantStore from "@/lib/RestaurantStore";
+import ReviewPage from "@/app/restaurantDetail/review";
 
 const RestaurantDetail = ({ params }: { params: { id: string } }) => {
+  const { getRestaurantDetail, restaurant } = useRestaurantStore();
+
+  useEffect(() => {
+    getRestaurantDetail(params.id);
+  }, [getRestaurantDetail, params.id]);
+
   return (
     <Container maxW="5xl" mt={8}>
       <Box display="flex" gap={12}>
         <Image
-          src="https://placehold.co/300x320/png"
+          src={
+            restaurant.restaurantImage?.length === undefined
+              ? "https://placehold.co/300x320/png"
+              : restaurant.restaurantImage
+          }
           alt="Restaurant Image"
           height={320}
           width={300}
@@ -34,7 +45,7 @@ const RestaurantDetail = ({ params }: { params: { id: string } }) => {
         >
           <Box width="100%">
             <Box>
-              <Heading as="h3">Restaurant Name</Heading>
+              <Heading as="h3">{restaurant.restaurantName}</Heading>
             </Box>
 
             <HStack justifyItems="center" mt={2} spacing={4}>
@@ -48,7 +59,9 @@ const RestaurantDetail = ({ params }: { params: { id: string } }) => {
                   letterSpacing="wide"
                   fontSize="sm"
                 >
-                  Address
+                  {restaurant.restaurantAddress === ""
+                    ? "unknown"
+                    : restaurant.restaurantAddress}
                 </Box>
               </Box>
 
@@ -62,7 +75,9 @@ const RestaurantDetail = ({ params }: { params: { id: string } }) => {
                   letterSpacing="wide"
                   fontSize="sm"
                 >
-                  City
+                  {restaurant.restaurantCity === ""
+                    ? "unknown"
+                    : restaurant.restaurantCity}
                 </Box>
               </Box>
 
@@ -77,24 +92,23 @@ const RestaurantDetail = ({ params }: { params: { id: string } }) => {
                   fontSize="sm"
                   textTransform="uppercase"
                 >
-                  5.5
+                  {restaurant.restaurantRating}
                 </Box>
               </Box>
             </HStack>
 
             <HStack mt={4}>
-              <Badge colorScheme="green">American</Badge>
-              <Badge colorScheme="green">Asian</Badge>
-              <Badge colorScheme="green">Indonesian</Badge>
+              {restaurant.restaurantCategories.map((categoriesItem, id) => {
+                return (
+                  <Badge key={id} colorScheme="green">
+                    {categoriesItem.name}
+                  </Badge>
+                );
+              })}
             </HStack>
 
             <Box mt={4}>
-              <Text as="span">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel,
-                accusantium consectetur provident cumque nam maiores voluptatum
-                dignissimos assumenda, quisquam, animi voluptatem molestias.
-                Molestias illo dignissimos voluptate soluta vero cupiditate non?
-              </Text>
+              <Text as="span">{restaurant.restaurantDesc}</Text>
             </Box>
 
             <Box mt={8}>
@@ -107,7 +121,19 @@ const RestaurantDetail = ({ params }: { params: { id: string } }) => {
               <Divider orientation="horizontal" my={3} />
 
               <Box mt={4}>
-                <DetailPage />
+                {restaurant.restaurantReview.map((reviewItem, id) => {
+                  return (
+                    <Box key={id}>
+                      <ReviewPage
+                        reviewerRating={reviewItem.reviewRating}
+                        reviewerName={reviewItem.reviewName}
+                        reviewText={reviewItem.reviewDesc}
+                        reviewImage={reviewItem.reviewImage}
+                      />
+                      <Divider orientation="horizontal" mt={8} />
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
           </Box>

@@ -1,14 +1,26 @@
 import { Box, Container, HStack, Image, Text } from "@chakra-ui/react";
 import StarRatings from "react-star-ratings";
 
-const DetailPage = () => {
+type ReviewPageProps = {
+  reviewerName: string;
+  reviewText: string;
+  reviewImage: string;
+  reviewerRating: number;
+};
+
+const ReviewPage = ({
+  reviewerName,
+  reviewText,
+  reviewImage,
+  reviewerRating,
+}: ReviewPageProps) => {
   return (
-    <Box>
+    <Box mt={4}>
       <Box>
         <StarRatings
-          rating={(5 / 10) * 5}
+          rating={reviewerRating}
           numberOfStars={5}
-          starDimension="24px"
+          starDimension="18px"
           starSpacing="1px"
           starRatedColor="yellow"
         />
@@ -24,19 +36,17 @@ const DetailPage = () => {
           />
         </Box>
         <Box fontWeight="bold" letterSpacing="wide" fontSize="md">
-          Username
+          {reviewerName}
         </Box>
       </HStack>
 
       <Box mt={3}>
-        <Text as="span">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        </Text>
+        <Text as="span">{reviewText}</Text>
       </Box>
 
       <Box mt={4}>
         <Image
-          src="https://placehold.co/240x240/png"
+          src={reviewImage}
           alt="Restaurant Image"
           height={24}
           width={24}
@@ -46,4 +56,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default ReviewPage;

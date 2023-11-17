@@ -7,6 +7,7 @@ import {
   CardBody,
   CardFooter,
   Image,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -14,14 +15,30 @@ import StarRatings from "react-star-ratings";
 
 type RestaurantCardProps = {
   title: string;
+  rating: number;
+  category: string;
+  imageUrl: string;
+  openStatus: string;
+  isOpen: boolean;
+  price: number;
+  href: string;
 };
 
-const RestaurantCard = ({ title }: RestaurantCardProps) => {
+const RestaurantCard = ({
+  title,
+  rating,
+  category,
+  imageUrl,
+  openStatus,
+  isOpen,
+  price,
+  href,
+}: RestaurantCardProps) => {
   return (
     <Card variant="unstyled">
       <CardBody>
         <Image
-          src="https://placehold.co/600x400/png"
+          src={imageUrl}
           alt="Restaurant Image"
           objectFit="cover"
           height={40}
@@ -32,10 +49,12 @@ const RestaurantCard = ({ title }: RestaurantCardProps) => {
           <Text>{title}</Text>
 
           <StarRatings
-            rating={(8.8 / 10) * 5}
+            // rating={(rating / 10) * 5}
+            rating={rating}
             numberOfStars={5}
             starDimension="16px"
             starSpacing="1px"
+            starRatedColor="yellow"
           />
 
           <Box
@@ -52,20 +71,32 @@ const RestaurantCard = ({ title }: RestaurantCardProps) => {
                 fontSize="xs"
                 textTransform="uppercase"
               >
-                Categories &bull; Price
+                {category} &bull; {"$".repeat(price)}
               </Box>
             </Box>
 
-            <Box as="span" color="gray.600" fontSize="sm">
-              ● reviews
+            <Box
+              as="span"
+              color="gray.600"
+              fontSize="sm"
+              display="flex"
+              alignItems="center"
+              gap={1}
+            >
+              <Text fontSize={24} color={isOpen ? "green" : "red"}>
+                ●
+              </Text>
+              {openStatus}
             </Box>
           </Box>
         </Stack>
       </CardBody>
       <CardFooter mt={6}>
-        <Button width="full" colorScheme="blue">
-          LEARN MORE
-        </Button>
+        <Link width="full" href={href}>
+          <Button width="full" colorScheme="blue">
+            LEARN MORE
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
