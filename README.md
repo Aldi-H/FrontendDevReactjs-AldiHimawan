@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FrontendDevReactjs-NamaAnda
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+This project is a ReactJS frontend application for displaying restaurant information, including a main page with filter navigation and a detail view.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Page Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Main**
+  - Filter navigation
+    - Open now (client side filter)
+    - Price (client side filter)
+    - Categories/Cuisines (server side search filter)
+  - Section
+    - Restaurant item
+      - Image (use first item in `photos`)
+      - Cuisine / Categories (use first item in `categories`)
+      - Rating
+      - Price range
+      - Open / Closed
+      - Restaurant name
+      - Learn more (navigate to Detail View)
+- **Detail View**
+  - Restaurant Name & Rating
+  - Map (optional)
+  - Section
+    - Review item
+      - Image
+      - Name
+      - Rating
+      - Text
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- NextJS Version: 14.0.2
+- ReactJS Version: ^18
+- Node Version: v20.9.0
+- NPM Version: 10.1.0
+- Yarn Version: 1.22.19
 
-## Learn More
+## How to Start
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone this repository.
+2. Navigate to the project folder.
+3. Install dependencies using `npm install` or `yarn install`.
+4. Start the project using `npm start` or `yarn start`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Authentication
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To access certain features, use the following credentials:
 
-## Deploy on Vercel
+- Username:
+- Password:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributors
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **API Developer**: Irvan Rizki Nugraha
+  - GitHub: [resto-faker](https://github.com/irvanrizkin/resto-faker)
+  - Contact: [LinkedIn](https://linkedin.com/in/irvan-rizki-n)
+
+## GitHub Repository
+
+[FrontendDevReactjs-AldiHimawan](https://github.com/Aldi-H/FrontendDevReactjs-AldiHimawan)
+
+## Deployment
+
+This project is deployed on [Netlify](https://www.netlify.com/). Visit [Live Demo](https://frontenddevreactjs-aldihimawan.netlify.app/).
